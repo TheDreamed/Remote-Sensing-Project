@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remote Sensing Project</title>
+    <link rel="stylesheet" type="text/css" href="./styles/remoteSensingStyles.css" />
+  </head>
+  <body>
+      <header>
+        <div class="nav">
+          <img src=".\img\logoCAWIL.png" alt="Logo" />
+          <img src=".\img\nameCAWIL.png" alt="Name" />
+        </div>
+      </header>
+
+    <main class="main">
+      <div class="sidebar">
+        <h3 class="fontPadding">Filters</h3>
+        <label for="vessel-select">Select Vessel:</label>
+
+        <select id="vessel-select">
+          <option value="" disabled selected hidden>Upload CSV File...</option>
+          <!-- Options will be populated dynamically -->
+        </select>
+
+        <button class="btnVesselFilter" onclick="applyVesselFilter()">
+          <svg
+            style="vertical-align: middle"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.9209 10.12C17.5909 10.04 17.2409 10 16.8809 10C14.2609 10 12.1309 12.13 12.1309 14.75C12.1309 15.64 12.3809 16.48 12.8209 17.2C13.1909 17.82 13.7009 18.35 14.3209 18.73C15.0609 19.22 15.9409 19.5 16.8809 19.5C18.6209 19.5 20.1309 18.57 20.9509 17.2C21.3909 16.48 21.6309 15.64 21.6309 14.75C21.6309 12.49 20.0509 10.59 17.9209 10.12ZM19.2509 14.13L16.7109 16.47C16.5709 16.6 16.3809 16.67 16.2009 16.67C16.0109 16.67 15.8209 16.6 15.6709 16.45L14.5009 15.28C14.2109 14.99 14.2109 14.51 14.5009 14.22C14.7909 13.93 15.2709 13.93 15.5609 14.22L16.2209 14.88L18.2309 13.03C18.5409 12.75 19.0109 12.77 19.2909 13.07C19.5709 13.38 19.5509 13.85 19.2509 14.13Z"
+              fill="white"
+            />
+            <path
+              d="M20.5799 4.02V6.24C20.5799 7.05 20.0799 8.06 19.5799 8.57L19.3999 8.73C19.2599 8.86 19.0499 8.89 18.8699 8.83C18.6699 8.76 18.4699 8.71 18.2699 8.66C17.8299 8.55 17.3599 8.5 16.8799 8.5C13.4299 8.5 10.6299 11.3 10.6299 14.75C10.6299 15.89 10.9399 17.01 11.5299 17.97C12.0299 18.81 12.7299 19.51 13.4899 19.98C13.7199 20.13 13.8099 20.45 13.6099 20.63C13.5399 20.69 13.4699 20.74 13.3999 20.79L11.9999 21.7C10.6999 22.51 8.90992 21.6 8.90992 19.98V14.63C8.90992 13.92 8.50992 13.01 8.10992 12.51L4.31992 8.47C3.81992 7.96 3.41992 7.05 3.41992 6.45V4.12C3.41992 2.91 4.31992 2 5.40992 2H18.5899C19.6799 2 20.5799 2.91 20.5799 4.02Z"
+              fill="white"
+            />
+          </svg>
+          Apply Vessel Filter
+        </button>
+        <hr class="rounded" />
+        <h3 class="fontPadding">Layers</h3>
+        <button class="btnLayers" onclick="">
+          <svg
+            style="vertical-align: middle"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_212_320)">
+              <path
+                d="M7.65055 20.91C7.62055 20.91 7.58055 20.93 7.55055 20.93C5.61055 19.97 4.03055 18.38 3.06055 16.44C3.06055 16.41 3.08055 16.37 3.08055 16.34C4.30055 16.7 5.56055 16.97 6.81055 17.18C7.03055 18.44 7.29055 19.69 7.65055 20.91Z"
+                fill="white"
+              />
+              <path
+                d="M20.9391 16.45C19.9491 18.44 18.2991 20.05 16.2891 21.02C16.6691 19.75 16.9891 18.47 17.1991 17.18C18.4591 16.97 19.6991 16.7 20.9191 16.34C20.9091 16.38 20.9391 16.42 20.9391 16.45Z"
+                fill="white"
+              />
+              <path
+                d="M21.0191 7.71001C19.7591 7.33001 18.4891 7.02001 17.1991 6.80001C16.9891 5.51001 16.6791 4.23001 16.2891 2.98001C18.3591 3.97001 20.0291 5.64001 21.0191 7.71001Z"
+                fill="white"
+              />
+              <path
+                d="M7.65047 3.09C7.29047 4.31 7.03047 5.55 6.82047 6.81C5.53047 7.01 4.25047 7.33 2.98047 7.71C3.95047 5.7 5.56047 4.05 7.55047 3.06C7.58047 3.06 7.62047 3.09 7.65047 3.09Z"
+                fill="white"
+              />
+              <path
+                d="M15.4898 6.59C13.1698 6.33 10.8298 6.33 8.50977 6.59C8.75977 5.22 9.07977 3.85 9.52977 2.53C9.54977 2.45 9.53977 2.39 9.54977 2.31C10.3398 2.12 11.1498 2 11.9998 2C12.8398 2 13.6598 2.12 14.4398 2.31C14.4498 2.39 14.4498 2.45 14.4698 2.53C14.9198 3.86 15.2398 5.22 15.4898 6.59Z"
+                fill="white"
+              />
+              <path
+                d="M6.59 15.49C5.21 15.24 3.85 14.92 2.53 14.47C2.45 14.45 2.39 14.46 2.31 14.45C2.12 13.66 2 12.85 2 12C2 11.16 2.12 10.34 2.31 9.56001C2.39 9.55001 2.45 9.55001 2.53 9.53001C3.86 9.09001 5.21 8.76001 6.59 8.51001C6.34 10.83 6.34 13.17 6.59 15.49Z"
+                fill="white"
+              />
+              <path
+                d="M22.0002 12C22.0002 12.85 21.8802 13.66 21.6902 14.45C21.6102 14.46 21.5502 14.45 21.4702 14.47C20.1402 14.91 18.7802 15.24 17.4102 15.49C17.6702 13.17 17.6702 10.83 17.4102 8.51001C18.7802 8.76001 20.1502 9.08001 21.4702 9.53001C21.5502 9.55001 21.6102 9.56001 21.6902 9.56001C21.8802 10.35 22.0002 11.16 22.0002 12Z"
+                fill="white"
+              />
+              <path
+                d="M15.4898 17.41C15.2398 18.79 14.9198 20.15 14.4698 21.47C14.4498 21.55 14.4498 21.61 14.4398 21.69C13.6598 21.88 12.8398 22 11.9998 22C11.1498 22 10.3398 21.88 9.54977 21.69C9.53977 21.61 9.54977 21.55 9.52977 21.47C9.08977 20.14 8.75977 18.79 8.50977 17.41C9.66977 17.54 10.8298 17.63 11.9998 17.63C13.1698 17.63 14.3398 17.54 15.4898 17.41Z"
+                fill="white"
+              />
+              <path
+                d="M15.7633 15.7633C13.2622 16.0789 10.7378 16.0789 8.23667 15.7633C7.92111 13.2622 7.92111 10.7378 8.23667 8.23667C10.7378 7.92111 13.2622 7.92111 15.7633 8.23667C16.0789 10.7378 16.0789 13.2622 15.7633 15.7633Z"
+                fill="white"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_212_320">
+                <rect width="24" height="24" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+          Satellite Imagery
+        </button>
+        <button class="btnLayers" onclick="">
+          <svg
+            style="vertical-align: middle"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_212_335)">
+              <path
+                d="M22 11.25H19.96C19.6 7.44 16.56 4.39 12.75 4.04V2C12.75 1.59 12.41 1.25 12 1.25C11.59 1.25 11.25 1.59 11.25 2V4.04C7.44 4.4 4.39 7.44 4.04 11.25H2C1.59 11.25 1.25 11.59 1.25 12C1.25 12.41 1.59 12.75 2 12.75H4.04C4.4 16.56 7.44 19.61 11.25 19.96V22C11.25 22.41 11.59 22.75 12 22.75C12.41 22.75 12.75 22.41 12.75 22V19.96C16.56 19.6 19.61 16.56 19.96 12.75H22C22.41 12.75 22.75 12.41 22.75 12C22.75 11.59 22.41 11.25 22 11.25ZM12 15.12C10.28 15.12 8.88 13.72 8.88 12C8.88 10.28 10.28 8.88 12 8.88C13.72 8.88 15.12 10.28 15.12 12C15.12 13.72 13.72 15.12 12 15.12Z"
+                fill="white"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_212_335">
+                <rect width="24" height="24" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+          Vessel Tracking
+        </button>
+        <button class="btnLayers" onclick="">
+          <svg
+            style="vertical-align: middle"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21.6702 6.95C21.0302 4.77999 19.2202 2.97 17.0502 2.33C15.4002 1.85 14.2602 1.89 13.4702 2.48C12.5202 3.19 12.4102 4.47 12.4102 5.38V7.87C12.4102 10.33 13.5302 11.58 15.7302 11.58H18.6002C19.5002 11.58 20.7902 11.47 21.5002 10.52C22.1102 9.74 22.1602 8.6 21.6702 6.95Z"
+              fill="white"
+            />
+            <path
+              d="M18.9094 13.36C18.6494 13.06 18.2694 12.89 17.8794 12.89H14.2994C12.5394 12.89 11.1094 11.46 11.1094 9.7V6.12C11.1094 5.73 10.9394 5.35 10.6394 5.09C10.3494 4.83 9.94941 4.71 9.56941 4.76C7.21941 5.06 5.05941 6.35 3.64941 8.29C2.22941 10.24 1.70941 12.62 2.15941 15C2.80941 18.44 5.55941 21.19 9.00941 21.84C9.55941 21.95 10.1094 22 10.6594 22C12.4694 22 14.2194 21.44 15.7094 20.35C17.6494 18.94 18.9394 16.78 19.2394 14.43C19.2894 14.04 19.1694 13.65 18.9094 13.36Z"
+              fill="white"
+            />
+          </svg>
+          Carbon Sink Estimation
+        </button>
+        <hr class="rounded" />
+        <h3 class="fontPadding">Locations</h3>
+
+        <button class="btnLocations" onclick="switchLocation('caribbean')">
+          <svg
+            style="vertical-align: middle"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g style="mix-blend-mode: plus-lighter">
+              <path
+                d="M15.5 11.2297C15.5 12.5571 14.9565 13.8945 13.9639 15.2275C13.3642 16.0328 12.6667 16.7449 12 17.3359C11.3333 16.7449 10.6358 16.0328 10.0361 15.2275C9.04345 13.8945 8.5 12.5571 8.5 11.2297C8.5 9.81727 8.99616 8.56421 9.7303 7.72488C10.4476 6.90477 11.281 6.58334 12 6.58334C12.719 6.58334 13.5524 6.90477 14.2697 7.72488C15.0038 8.56421 15.5 9.81727 15.5 11.2297Z"
+                stroke="white"
+                stroke-width="9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10.299 9.968V8.902C10.299 8.75467 10.364 8.642 10.494 8.564L11.677 7.823C11.8763 7.70167 12.0453 7.641 12.184 7.641H13.224C13.406 7.641 13.497 7.732 13.497 7.914V15.727C13.497 15.831 13.4753 15.9047 13.432 15.948C13.3973 15.9827 13.3323 16 13.237 16H12.119C11.937 16 11.846 15.909 11.846 15.727V9.396L10.572 10.124C10.39 10.202 10.299 10.15 10.299 9.968Z"
+                fill="black"
+              />
+            </g>
+          </svg>
+          Caribbean
+        </button>
+        <button class="btnLocations" onclick="switchLocation('mediterranean')">
+          <svg
+            style="vertical-align: middle"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g style="mix-blend-mode: plus-lighter">
+              <path
+                d="M15.5 11.2297C15.5 12.5571 14.9565 13.8944 13.9639 15.2275C13.3642 16.0328 12.6667 16.7449 12 17.3359C11.3333 16.7449 10.6358 16.0328 10.0361 15.2275C9.04345 13.8944 8.5 12.5571 8.5 11.2297C8.5 9.81726 8.99616 8.56419 9.7303 7.72486C10.4476 6.90476 11.281 6.58333 12 6.58333C12.719 6.58333 13.5524 6.90476 14.2697 7.72486C15.0038 8.56419 15.5 9.81726 15.5 11.2297Z"
+                stroke="white"
+                stroke-width="9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.611 15.727V14.492C9.611 13.998 9.82333 13.5777 10.248 13.231L12.64 11.203C13.03 10.8823 13.225 10.5357 13.225 10.163V9.773C13.225 9.50433 13.16 9.31367 13.03 9.201C12.9087 9.07967 12.705 9.019 12.419 9.019H11.964C11.6867 9.019 11.4917 9.07967 11.379 9.201C11.2663 9.31367 11.21 9.50433 11.21 9.773V10.189C11.21 10.3797 11.119 10.475 10.937 10.475H9.832C9.65 10.475 9.559 10.3797 9.559 10.189V9.747C9.559 9.071 9.74533 8.551 10.118 8.187C10.4907 7.823 11.0193 7.641 11.704 7.641H12.692C13.3767 7.641 13.9053 7.823 14.278 8.187C14.6507 8.551 14.837 9.071 14.837 9.747V10.267C14.837 10.943 14.577 11.502 14.057 11.944L11.613 14.024C11.509 14.1193 11.457 14.2233 11.457 14.336V14.544H14.564C14.746 14.544 14.837 14.635 14.837 14.817V15.727C14.837 15.909 14.746 16 14.564 16H9.884C9.702 16 9.611 15.909 9.611 15.727Z"
+                fill="black"
+              />
+            </g>
+          </svg>
+          Mediterranean
+        </button>
+        <button
+          class="btnLocations"
+          onclick="switchLocation('south_china_sea')"
+        >
+          <svg
+            style="vertical-align: middle"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g style="mix-blend-mode: plus-lighter">
+              <path
+                d="M15.5 11.2297C15.5 12.5571 14.9565 13.8944 13.9639 15.2275C13.3642 16.0328 12.6667 16.7449 12 17.3359C11.3333 16.7449 10.6358 16.0328 10.0361 15.2275C9.04345 13.8944 8.5 12.5571 8.5 11.2297C8.5 9.81726 8.99616 8.56419 9.7303 7.72486C10.4476 6.90476 11.281 6.58333 12 6.58333C12.719 6.58333 13.5524 6.90476 14.2697 7.72486C15.0038 8.56419 15.5 9.81726 15.5 11.2297Z"
+                stroke="white"
+                stroke-width="9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M11.847 11.2214H12.51C12.796 11.2214 12.9997 11.165 13.121 11.0524C13.251 10.931 13.316 10.736 13.316 10.4674V9.85637C13.316 9.58771 13.251 9.39704 13.121 9.28437C12.9997 9.16304 12.796 9.10237 12.51 9.10237H11.886C11.6087 9.10237 11.4137 9.16304 11.301 9.28437C11.1883 9.39704 11.132 9.58771 11.132 9.85637V10.1814C11.132 10.3634 11.041 10.4544 10.859 10.4544H9.754C9.572 10.4544 9.481 10.3634 9.481 10.1814V9.83037C9.481 9.15437 9.66733 8.63437 10.04 8.27037C10.4127 7.90637 10.9413 7.72437 11.626 7.72437H12.783C13.4677 7.72437 13.9963 7.90637 14.369 8.27037C14.7417 8.63437 14.928 9.15437 14.928 9.83037V10.4804C14.928 11.2084 14.5857 11.6807 13.901 11.8974C14.5857 12.0447 14.928 12.517 14.928 13.3144V13.9774C14.928 14.6534 14.7417 15.1734 14.369 15.5374C13.9963 15.9014 13.4677 16.0834 12.783 16.0834H11.626C10.9413 16.0834 10.4127 15.9014 10.04 15.5374C9.66733 15.1734 9.481 14.6534 9.481 13.9774V13.6134C9.481 13.4227 9.572 13.3274 9.754 13.3274H10.859C11.041 13.3274 11.132 13.4227 11.132 13.6134V13.9514C11.132 14.2287 11.1883 14.4237 11.301 14.5364C11.4137 14.649 11.6087 14.7054 11.886 14.7054H12.51C12.796 14.7054 12.9997 14.649 13.121 14.5364C13.251 14.415 13.316 14.22 13.316 13.9514V13.3144C13.316 13.0457 13.251 12.855 13.121 12.7424C12.9997 12.621 12.796 12.5604 12.51 12.5604H11.847C11.665 12.5604 11.574 12.4694 11.574 12.2874V11.5074C11.574 11.3167 11.665 11.2214 11.847 11.2214Z"
+                fill="black"
+              />
+            </g>
+          </svg>
+          South China Sea
+        </button>
+
+        <hr class="rounded" />
+        <h3 class="fontPadding">CSV FILES</h3>
+        <label for="csvFileInput" class="csvFileInput">
+          <input type="file" id="csvFileInput" accept=".csv" /><svg
+            style="vertical-align: middle; margin-right: 10px; margin-top: 5px;"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21.0169 7.99175C21.4148 8.55833 20.9405 9.25 20.2482 9.25H3C2.44772 9.25 2 8.80228 2 8.25V6.42C2 3.98 3.98 2 6.42 2H8.74C10.37 2 10.88 2.53 11.53 3.4L12.93 5.26C13.24 5.67 13.28 5.72 13.86 5.72H16.65C18.4546 5.72 20.0516 6.61709 21.0169 7.99175Z"
+              fill="white"
+            />
+            <path
+              d="M21.9834 11.7463C21.9815 11.1953 21.5343 10.7497 20.9834 10.7497L2.99998 10.75C2.44771 10.75 2 11.1977 2 11.75V16.65C2 19.6 4.4 22 7.35 22H16.65C19.6 22 22 19.6 22 16.65L21.9834 11.7463ZM14.5 16.75H12.81V18.5C12.81 18.91 12.47 19.25 12.06 19.25C11.64 19.25 11.31 18.91 11.31 18.5V16.75H9.5C9.09 16.75 8.75 16.41 8.75 16C8.75 15.59 9.09 15.25 9.5 15.25H11.31V13.5C11.31 13.09 11.64 12.75 12.06 12.75C12.47 12.75 12.81 13.09 12.81 13.5V15.25H14.5C14.91 15.25 15.25 15.59 15.25 16C15.25 16.41 14.91 16.75 14.5 16.75Z"
+              fill="white"
+            />
+          </svg>
+          Upload CSV File
+        </label>
+        <button id="save-csv-button" class="btnSaveCSV" onclick="saveToCSV()">
+          <svg
+            style="vertical-align: middle;"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.8 9H12.75V13.44L14.82 11.37C14.97 11.22 15.16 11.15 15.35 11.15C15.54 11.15 15.73 11.22 15.88 11.37C16.17 11.66 16.17 12.14 15.88 12.43L12.53 15.78C12.24 16.07 11.76 16.07 11.47 15.78L8.12 12.43C7.83 12.14 7.83 11.66 8.12 11.37C8.41 11.08 8.89 11.08 9.18 11.37L11.25 13.44V9H7.2C4 9 2 11 2 14.2V16.79C2 20 4 22 7.2 22H16.79C19.99 22 21.99 20 21.99 16.8V14.2C22 11 20 9 16.8 9Z"
+              fill="white"
+            />
+            <path
+              d="M12.75 2.75C12.75 2.34 12.41 2 12 2C11.59 2 11.25 2.34 11.25 2.75V9H12.75V2.75Z"
+              fill="white"
+            />
+          </svg>
+          Save to CSV
+        </button>
+        </label>
+        
+        <hr class="rounded" />
+        <div class="controls">
+          <h3 class="fontPadding">Animation Controls</h3>
+          <label class="speedSlider" for="speed">Speed:</label>
+          <input
+            type="range"
+            id="speed"
+            name="speed"
+            min="1"
+            max="10"
+            value="1"
+          />
+          <label for="current-time">Current Time:</label>
+          <input type="text" id="current-time" readonly />
+        </div>
+      </div>
+      <div id="map"></div>
+      <div class="info-box" id="info-box">
+        <img src=".\img\shipImage.jpg" alt="Vessel Image" id="vessel-image" />
+        <p id="vessel-info"></p>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2024 Remote Sensing Dashboard Team</p>
+    </footer>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=API_KEY_PLACEHOLDER&callback=initMap&libraries=maps,places"
+    async
+    defer
+  ></script>
+    <script>
+      var map;
+      var googleMap;
+      var googleMarkers = [];
+      var vesselPath = [];
+      var marker;
+      var animationSpeed = 3000000; // Adjust speed as needed
+
+      function initMap() {
+        map = "google";
+        googleMap = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 0.9257590770721436, lng: 103.87956237792969 },
+          zoom: 2,
+          mapId: "DEMO_MAP_ID",
+        });
+        console.log("Map initialized");
+      }
+
+      function switchLocation(location) {
+        var locations = {
+          caribbean: { lat: 14.561218949871668, lng: -75.12314688161001 },
+          mediterranean: { lat: 34.69429634475286, lng: 17.247421229316146 },
+          south_china_sea: { lat: 15.627832298939454, lng: 114.18425425000001 },
+        };
+
+        var newCenter = locations[location];
+        googleMap.setCenter(newCenter);
+
+        googleMarkers.forEach((marker) => marker.setMap(null));
+        googleMarkers = [];
+
+        var googleMarker = new google.maps.Marker({
+          position: newCenter,
+          map: googleMap,
+          title:
+            location.charAt(0).toUpperCase() +
+            location.slice(1).replace("_", " "),
+        });
+        googleMarkers.push(googleMarker);
+      }
+
+      document
+        .getElementById("csvFileInput")
+        .addEventListener("change", function (event) {
+          var file = event.target.files[0];
+          if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var text = e.target.result;
+              parseCSVData(text);
+            };
+            reader.readAsText(file);
+          }
+        });
+
+      function parseCSVData(data) {
+        vesselPath = [];
+        var rows = data.split("\n");
+        var vessels = new Set();
+        for (var i = 1; i < rows.length; i++) {
+          var cells = rows[i].split(",");
+          if (cells.length > 1) {
+            var lat = parseFloat(cells[3]);
+            var lon = parseFloat(cells[2]);
+            var timestamp = cells[6];
+            var vesselName = cells[0]; // Assuming vessel name is in the first column
+            var speed = cells[1];
+            var port = cells[7];
+            vessels.add(vesselName); // Add vessel name to set 
+            vesselPath.push({
+              lat: lat,
+              lon: lon,
+              timestamp: timestamp,
+              port: port,
+              vesselName: vesselName,
+            });
+          }
+        }
+        
+        document
+          .getElementById("save-csv-button")
+          .addEventListener("click", saveToCSV);
+
+        function saveToCSV() {
+          // Call info box
+          var infobox = document.getElementById("info-box");
+          if (!infobox) {
+            console.error("Infobox element not found!");
+            return;
+          }
+
+          var vesselData = infobox.innerText || infobox.textContent;
+          if (!vesselData) {
+            console.error("No data found in infobox!");
+            return;
+          }
+
+          // Prepare CSV content
+          var csvContent = "data:text/csv;charset=utf-8,";
+          csvContent += "Vessel Information\n"; // header
+          csvContent += vesselData
+            .split("\n")
+            .map((row) => row.split("\t").join(","))
+            .join("\n"); // replace new lines with commas
+
+          // Create a downloadable link
+          var encodedUri = encodeURI(csvContent);
+          var link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "vessel_information.csv");
+          document.body.appendChild(link); // Required for FF
+
+          link.click(); // This will download the data file named "vessel_information.csv"
+          document.body.removeChild(link);
+        }
+        
+        // Populate vessel dropdown
+        var vesselSelect = document.getElementById("vessel-select");
+        vesselSelect.innerHTML = "";
+        vessels.forEach(function (vessel) {
+          var option = document.createElement("option");
+          option.value = vessel;
+          option.text = vessel;
+          vesselSelect.appendChild(option);
+        });
+        console.log(vesselPath);
+      }
+
+      vesselSearch = document.querySelector("#vessel_select");
+      var when = "keyup"; 
+
+      vesselSearch.addEventListener("keyup", function (e) {
+          var text = e.target.value; 
+          var options = vesselSearch.options; 
+          for (var i = 0; i < options.length; i++) {
+              var option = options[i]; 
+              var optionText = option.text; 
+              var lowerOptionText = optionText.toLowerCase();
+              var lowerText = text.toLowerCase(); 
+              var regex = new RegExp("^" + text, "i");
+              var match = optionText.match(regex); 
+              var contains = lowerOptionText.indexOf(lowerText) != -1;
+
+              timeout = setTimeout(function() { if (match || contains) {
+                  option.selected = true;
+                  return;
+              }}, 1000);
+
+              clearTimeout(timeout);
+              vesselSearch.selectedIndex = 0; 
+          }
+      });
+
+      function applyVesselFilter() {
+        var selectedVessel = document.getElementById("vessel-select").value;
+        var filteredPath = vesselPath.filter(
+          (point) => point.vesselName === selectedVessel
+        );
+        animatePath(filteredPath);
+      }
+
+      function animatePath(path) {
+        if (marker) {
+          marker.setMap(null);
+        }
+
+        var coordinates = path.map((point) => ({
+          lat: point.lat,
+          lng: point.lon,
+        }));
+        var timestamps = path.map((point) => point.timestamp);
+
+        marker = new google.maps.Marker({
+          position: coordinates[0],
+          map: googleMap,
+          icon: {
+            url: "./img/shipIcon.png",
+            scaledSize: new google.maps.Size(32, 32), // Adjust this size to match your resized ship.png
+          },
+        });
+
+        var currentIndex = 0;
+        var intervalId = setInterval(function () {
+          marker.setPosition(coordinates[currentIndex]);
+          document.getElementById("current-time").value = new Date(
+            timestamps[currentIndex]
+          ).toLocaleString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          });
+
+          // Update marker click event with new position information
+          marker.addListener(
+            "click",
+            (function (point) {
+              return function () {
+                displayVesselInfo(point);
+              };
+            })(path[currentIndex])
+          );
+
+          currentIndex++;
+          if (currentIndex === coordinates.length) {
+            clearInterval(intervalId);
+          }
+        }, animationSpeed / path.length);
+      }
+
+      function displayVesselInfo(point) {
+        var infoBox = document.getElementById("info-box");
+        var vesselInfo = document.getElementById("vessel-info");
+        vesselInfo.innerHTML =
+          "Vessel: " +
+          point.vesselName + "<br>" +
+          "<br>Last Seen: " +
+          new Date(point.timestamp).toLocaleString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })+
+    "<br>ETA: 2 hours 2mins near port" +
+    "<br>Carbon Sink: 1L / 100km" +
+    "<br>Coordinates " +
+    point.lat +
+    "," +
+    point.lon +
+    "<br>" +
+    "<br>Departure Port:  " +
+    point.port;
+        infoBox.style.display = "block";
+
+        // // Recalculate position of the info box
+        // google.maps.event.addListener(googleMap, "bounds_changed", function () {
+        //   var projection = googleMap.getProjection();
+        //   var position = marker.getPosition();
+        //   var point = projection.fromLatLngToPoint(position);
+        //   var scale = Math.pow(2, googleMap.getZoom());
+        //   var left = point.x * scale;
+        //   var top = point.y * scale;
+        //   infoBox.style.left = left + "px";
+        //   infoBox.style.top = top + "px";
+        // });
+
+        // google.maps.event.trigger(googleMap, "bounds_changed");
+      }
+
+      function calculateETA(timestamp) {
+        // Dummy function for ETA calculation
+        return "ETA Placeholder";
+      }
+
+      function calculateCarbonSink() {
+        // Dummy function for carbon sink estimation
+        return "Carbon Sink Placeholder";
+      }
+
+      document
+        .getElementById("carbon-sink")
+        .addEventListener("change", function (event) {
+          if (event.target.checked) {
+            displayCarbonSinkEstimation();
+          }
+        });
+    </script>
+  </body>
+</html>
