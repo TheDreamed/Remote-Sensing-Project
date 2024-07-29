@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Remote Sensing Project</title>
-    <link rel="stylesheet" type="text/css" href="./styles/remoteSensingStyles.css" />
+    <link rel="stylesheet" type="text/css" href="remoteSensingStyles.css" />
   </head>
   <body>
       <header>
@@ -295,10 +295,10 @@
       <p>&copy; 2024 Remote Sensing Dashboard Team</p>
     </footer>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=API_KEY_PLACEHOLDER&callback=initMap&libraries=maps,places"
-    async
-    defer
-  ></script>
+      src="https://maps.googleapis.com/maps/api/js?key=<YourApiKey>callback=initMap&libraries=maps,places"
+      async
+      defer
+    ></script>
     <script>
       var map;
       var googleMap;
@@ -365,14 +365,11 @@
             var lon = parseFloat(cells[2]);
             var timestamp = cells[6];
             var vesselName = cells[0]; // Assuming vessel name is in the first column
-            var speed = cells[1];
-            var port = cells[7];
-            vessels.add(vesselName); // Add vessel name to set 
+            vessels.add(vesselName); // Add vessel name to set
             vesselPath.push({
               lat: lat,
               lon: lon,
               timestamp: timestamp,
-              port: port,
               vesselName: vesselName,
             });
           }
@@ -516,8 +513,8 @@
         var vesselInfo = document.getElementById("vessel-info");
         vesselInfo.innerHTML =
           "Vessel: " +
-          point.vesselName + "<br>" +
-          "<br>Last Seen: " +
+          point.vesselName +
+          "<br>Timestamp: " +
           new Date(point.timestamp).toLocaleString("en-US", {
             month: "long",
             day: "numeric",
@@ -525,16 +522,11 @@
             hour: "numeric",
             minute: "numeric",
             hour12: true,
-          })+
-    "<br>ETA: 2 hours 2mins near port" +
-    "<br>Carbon Sink: 1L / 100km" +
-    "<br>Coordinates " +
-    point.lat +
-    "," +
-    point.lon +
-    "<br>" +
-    "<br>Departure Port:  " +
-    point.port;
+          }) +
+          "<br>ETA: " +
+          calculateETA(point.timestamp) +
+          "<br>Carbon Sink Estimation: " +
+          calculateCarbonSink();
         infoBox.style.display = "block";
 
         // // Recalculate position of the info box
